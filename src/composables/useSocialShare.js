@@ -1,145 +1,151 @@
-import html2canvas from 'html2canvas'
+import html2canvas from "html2canvas";
 
 export function useSocialShare() {
   function shareToTwitter(text, url) {
-    const tweetText = encodeURIComponent(text)
-    const tweetUrl = encodeURIComponent(url || window.location.href)
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}`
-    window.open(twitterUrl, '_blank', 'width=550,height=420')
+    const tweetText = encodeURIComponent(text);
+    const tweetUrl = encodeURIComponent(url || window.location.href);
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}`;
+    window.open(twitterUrl, "_blank", "width=550,height=420");
   }
 
   function shareToFacebook(url) {
-    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url || window.location.href)}`
-    window.open(facebookUrl, '_blank', 'width=550,height=420')
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      url || window.location.href
+    )}`;
+    window.open(facebookUrl, "_blank", "width=550,height=420");
   }
 
   function shareToWhatsApp(text, url) {
-    const message = encodeURIComponent(`${text}\n\n${url || window.location.href}`)
-    const whatsappUrl = `https://wa.me/?text=${message}`
-    window.open(whatsappUrl, '_blank')
+    const message = encodeURIComponent(
+      `${text}\n\n${url || window.location.href}`
+    );
+    const whatsappUrl = `https://wa.me/?text=${message}`;
+    window.open(whatsappUrl, "_blank");
   }
 
   async function shareViaWebAPI(text, url, file) {
     if (!navigator.share) {
-      return false
+      return false;
     }
 
     try {
       const shareData = {
-        title: 'CAN Bracket - Mes prédictions',
+        title: "CAN Bracket - Mes prédictions",
         text: text,
         url: url || window.location.href,
-      }
+      };
 
       if (file) {
-        shareData.files = [file]
+        shareData.files = [file];
       }
 
-      await navigator.share(shareData)
-      return true
+      await navigator.share(shareData);
+      return true;
     } catch (error) {
-      if (error.name !== 'AbortError') {
-        console.error('Error sharing:', error)
+      if (error.name !== "AbortError") {
+        console.error("Error sharing:", error);
       }
-      return false
+      return false;
     }
   }
 
-  async function downloadAsImage(elementRef, filename = 'can-bracket.png') {
+  async function downloadAsImage(elementRef, filename = "can-bracket.png") {
     if (!elementRef) {
-      console.error('Element reference is required')
-      return null
+      console.error("Element reference is required");
+      return null;
     }
 
-    let element = null
+    let element = null;
     if (elementRef.value) {
-      element = elementRef.value.$el || elementRef.value
+      element = elementRef.value.$el || elementRef.value;
     } else {
-      element = elementRef
+      element = elementRef;
     }
-    
+
     if (!element) {
-      console.error('Element not found')
-      return null
+      console.error("Element not found");
+      return null;
     }
 
     try {
       const canvas = await html2canvas(element, {
-        backgroundColor: '#c1272d',
+        backgroundColor: "#c1272d",
         scale: 2,
         logging: false,
         useCORS: true,
         allowTaint: false,
-      })
+      });
 
       canvas.toBlob((blob) => {
         if (!blob) {
-          console.error('Failed to create blob')
-          return
+          console.error("Failed to create blob");
+          return;
         }
 
-        const url = URL.createObjectURL(blob)
-        const link = document.createElement('a')
-        link.href = url
-        link.download = filename
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        URL.revokeObjectURL(url)
-      }, 'image/png')
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }, "image/png");
     } catch (error) {
-      console.error('Error generating image:', error)
-      return null
+      console.error("Error generating image:", error);
+      return null;
     }
   }
 
   async function shareImageViaWebAPI(elementRef) {
     if (!navigator.share || !elementRef) {
-      return false
+      return false;
     }
 
-    const element = elementRef.value?.$el || elementRef.value || elementRef
-    
+    const element = elementRef.value?.$el || elementRef.value || elementRef;
+
     if (!element) {
-      return false
+      return false;
     }
 
     try {
       const canvas = await html2canvas(element, {
-        backgroundColor: '#c1272d',
+        backgroundColor: "#c1272d",
         scale: 2,
         logging: false,
         useCORS: true,
         allowTaint: false,
-      })
+      });
 
       return new Promise((resolve) => {
         canvas.toBlob(async (blob) => {
           if (!blob) {
-            resolve(false)
-            return
+            resolve(false);
+            return;
           }
 
-          const file = new File([blob], 'can-bracket.png', { type: 'image/png' })
-          
+          const file = new File([blob], "can-bracket.png", {
+            type: "image/png",
+          });
+
           try {
             await navigator.share({
-              title: 'CAN Bracket - Mes prédictions',
-              text: 'Voici mes prédictions pour la CAN 2025 !',
+              title: "CAN Bracket - Mes prédictions",
+              text: "Voici mes prédictions pour la CAN 2025 !",
               files: [file],
-            })
-            resolve(true)
+            });
+            resolve(true);
           } catch (error) {
-            if (error.name !== 'AbortError') {
-              console.error('Error sharing image:', error)
+            if (error.name !== "AbortError") {
+              console.error("Error sharing image:", error);
             }
-            resolve(false)
+            resolve(false);
           }
-        }, 'image/png')
-      })
+        }, "image/png");
+      });
     } catch (error) {
-      console.error('Error generating image for share:', error)
-      return false
+      console.error("Error generating image for share:", error);
+      return false;
     }
   }
 
@@ -150,6 +156,5 @@ export function useSocialShare() {
     shareViaWebAPI,
     downloadAsImage,
     shareImageViaWebAPI,
-  }
+  };
 }
-
