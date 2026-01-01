@@ -22,12 +22,11 @@
         <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Partager mes prédictions</h3>
         <div class="flex flex-wrap justify-center gap-3">
           <button
-            v-if="canUseNativeShare"
             @click="handleNativeShare"
             class="flex items-center gap-2 bg-can-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-md"
           >
             <span>📤</span>
-            <span>Partager</span>
+            <span>Partager à tout</span>
           </button>
 
           <button
@@ -303,10 +302,22 @@ function handleShareWhatsApp() {
 }
 
 async function handleNativeShare() {
-  const shared = await shareImageViaWebAPI(bracketRef)
-  if (!shared) {
-    await shareViaWebAPI(shareText.value)
+  // Essayer d'abord de partager l'image via l'API native (comme sur mobile)
+  if (canUseNativeShare.value) {
+    const shared = await shareImageViaWebAPI(bracketRef)
+    if (shared) {
+      return
+    }
+    // Si l'image n'a pas pu être partagée, essayer de partager le texte
+    const textShared = await shareViaWebAPI(shareText.value)
+    if (textShared) {
+      return
+    }
   }
+  
+  // Fallback : si l'API native n'est pas disponible, télécharger l'image
+  // L'utilisateur pourra ensuite la partager manuellement
+  await handleDownloadImage()
 }
 
 async function handleDownloadImage() {
