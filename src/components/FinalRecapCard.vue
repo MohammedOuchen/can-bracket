@@ -1,9 +1,8 @@
 <template>
-  <div class="final-recap w-full max-w-4xl mx-auto px-4 py-8">
+  <div class="final-recap w-full max-w-6xl mx-auto px-4 py-8">
     <div
       class="bg-white rounded-2xl shadow-2xl p-6 md:p-10 border-4 border-gold animate-fade-in"
     >
-      <!-- Champion Section -->
       <div v-if="champion" class="text-center mb-10">
         <div class="text-6xl md:text-8xl mb-4 animate-bounce-slow">
           {{ champion.flag }}
@@ -17,9 +16,59 @@
         <div class="w-24 h-1 bg-gold mx-auto rounded"></div>
       </div>
 
-      <!-- Full Knockout Path -->
-      <div class="space-y-8">
-        <!-- Round of 16 -->
+      <BracketVisual ref="bracketRef" :matches="matches" :champion="champion" class="mb-8" />
+
+      <div class="mb-8">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Partager mes prédictions</h3>
+        <div class="flex flex-wrap justify-center gap-3">
+          <button
+            v-if="canUseNativeShare"
+            @click="handleNativeShare"
+            class="flex items-center gap-2 bg-can-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-md"
+          >
+            <span>📤</span>
+            <span>Partager</span>
+          </button>
+
+          <button
+            @click="handleShareTwitter"
+            class="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-md"
+          >
+            <span>🐦</span>
+            <span>Twitter</span>
+          </button>
+
+          <button
+            @click="handleShareFacebook"
+            class="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-md"
+          >
+            <span>📘</span>
+            <span>Facebook</span>
+          </button>
+
+          <button
+            @click="handleShareWhatsApp"
+            class="flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-md"
+          >
+            <span>💬</span>
+            <span>WhatsApp</span>
+          </button>
+
+          <button
+            @click="handleDownloadImage"
+            class="flex items-center gap-2 bg-morocco-red text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-md"
+          >
+            <span>💾</span>
+            <span>Télécharger l'image</span>
+          </button>
+        </div>
+      </div>
+
+      <details class="mb-8">
+        <summary class="text-lg font-bold text-morocco-red cursor-pointer mb-4">
+          Voir la liste détaillée
+        </summary>
+        <div class="space-y-8 mt-4">
         <div class="knockout-round">
           <h3 class="text-xl font-bold text-morocco-red mb-4">Round of 16</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -61,7 +110,6 @@
           </div>
         </div>
 
-        <!-- Quarter-finals -->
         <div class="knockout-round">
           <h3 class="text-xl font-bold text-morocco-red mb-4">Quarter-finals</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -103,7 +151,6 @@
           </div>
         </div>
 
-        <!-- Semi-finals -->
         <div class="knockout-round">
           <h3 class="text-xl font-bold text-morocco-red mb-4">Semi-finals</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -145,7 +192,6 @@
           </div>
         </div>
 
-        <!-- Final -->
         <div class="knockout-round">
           <h3 class="text-xl font-bold text-morocco-red mb-4">Final</h3>
           <div
@@ -183,9 +229,9 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </details>
 
-      <!-- Reset Button -->
       <div class="mt-10 text-center">
         <button
           @click="handleReset"
@@ -199,7 +245,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
+import BracketVisual from './BracketVisual.vue'
+import { useSocialShare } from '../composables/useSocialShare.js'
 
 const props = defineProps({
   matches: {
@@ -213,6 +261,18 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['reset'])
+
+const bracketRef = ref(null)
+const { shareToTwitter, shareToFacebook, shareToWhatsApp, shareViaWebAPI, downloadAsImage, shareImageViaWebAPI } = useSocialShare()
+
+const canUseNativeShare = computed(() => {
+  return typeof navigator !== 'undefined' && navigator.share !== undefined
+})
+
+const shareText = computed(() => {
+  if (!props.champion) return 'Voici mes prédictions pour la CAN 2025 !'
+  return `🏆 Mon champion prédit pour la CAN 2025 : ${props.champion.name} ${props.champion.flag}\n\nVoici mes prédictions complètes !`
+})
 
 const roundOf16Matches = computed(() => {
   return props.matches.filter(m => m.round === 'round_of_16')
@@ -229,6 +289,29 @@ const semiFinalMatches = computed(() => {
 const finalMatch = computed(() => {
   return props.matches.find(m => m.round === 'final')
 })
+
+function handleShareTwitter() {
+  shareToTwitter(shareText.value)
+}
+
+function handleShareFacebook() {
+  shareToFacebook()
+}
+
+function handleShareWhatsApp() {
+  shareToWhatsApp(shareText.value)
+}
+
+async function handleNativeShare() {
+  const shared = await shareImageViaWebAPI(bracketRef)
+  if (!shared) {
+    await shareViaWebAPI(shareText.value)
+  }
+}
+
+async function handleDownloadImage() {
+  await downloadAsImage(bracketRef, `can-bracket-${props.champion?.name || 'predictions'}.png`)
+}
 
 function handleReset() {
   emit('reset')
