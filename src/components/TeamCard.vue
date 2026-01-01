@@ -1,12 +1,9 @@
 <template>
   <div
-    :draggable="true"
-    @dragstart="handleDragStart"
-    @dragend="handleDragEnd"
+    @click="handleClick"
     :class="[
       'team-card',
-      'cursor-grab',
-      'active:cursor-grabbing',
+      'cursor-pointer',
       'bg-white',
       'rounded-lg',
       'shadow-md',
@@ -19,8 +16,8 @@
       'hover:shadow-lg',
       'hover:border-can-green',
       'hover:scale-105',
+      'active:scale-95',
       'min-w-[140px]',
-      isDragging ? 'opacity-50 scale-95' : 'opacity-100',
     ]"
   >
     <div class="flex flex-col items-center gap-2">
@@ -33,29 +30,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 const props = defineProps({
   team: {
     type: Object,
     required: true,
   },
-})
+});
 
-const emit = defineEmits(['drag-start', 'drag-end'])
+const emit = defineEmits(["select-team"]);
 
-const isDragging = ref(false)
-
-function handleDragStart(event) {
-  isDragging.value = true
-  event.dataTransfer.effectAllowed = 'move'
-  event.dataTransfer.setData('team', JSON.stringify(props.team))
-  emit('drag-start', props.team)
-}
-
-function handleDragEnd() {
-  isDragging.value = false
-  emit('drag-end')
+function handleClick() {
+  emit("select-team", props.team);
 }
 </script>
 

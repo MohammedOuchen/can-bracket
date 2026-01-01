@@ -23,6 +23,7 @@
       <TeamCard
         v-if="match.teams[0]"
         :team="match.teams[0]"
+        @select-team="handleClickWinner"
         class="w-full md:w-auto"
       />
 
@@ -31,27 +32,9 @@
       <TeamCard
         v-if="match.teams[1]"
         :team="match.teams[1]"
+        @select-team="handleClickWinner"
         class="w-full md:w-auto"
       />
-    </div>
-
-    <DropZone @drop="handleDrop" class="mb-8" />
-
-    <div class="md:hidden flex flex-col gap-3">
-      <button
-        v-if="match.teams[0]"
-        @click="handleClickWinner(match.teams[0])"
-        class="w-full bg-can-green text-white py-4 px-6 rounded-lg font-semibold text-lg shadow-md hover:bg-opacity-90 active:scale-95 transition-all"
-      >
-        {{ match.teams[0].flag }} {{ match.teams[0].name }}
-      </button>
-      <button
-        v-if="match.teams[1]"
-        @click="handleClickWinner(match.teams[1])"
-        class="w-full bg-can-green text-white py-4 px-6 rounded-lg font-semibold text-lg shadow-md hover:bg-opacity-90 active:scale-95 transition-all"
-      >
-        {{ match.teams[1].flag }} {{ match.teams[1].name }}
-      </button>
     </div>
   </div>
 </template>
@@ -59,7 +42,6 @@
 <script setup>
 import { computed } from "vue";
 import TeamCard from "./TeamCard.vue";
-import DropZone from "./DropZone.vue";
 import ProgressStepper from "./ProgressStepper.vue";
 
 const props = defineProps({
@@ -90,10 +72,6 @@ const roundLabel = computed(() => {
   if (!props.match) return "";
   return roundLabels[props.match.round] || props.match.round;
 });
-
-function handleDrop(team) {
-  emit("select-winner", team);
-}
 
 function handleClickWinner(team) {
   emit("select-winner", team);
