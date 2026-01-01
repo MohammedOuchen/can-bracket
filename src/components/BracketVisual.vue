@@ -1,18 +1,18 @@
 <template>
   <div
     ref="bracketRef"
-    class="bracket-visual relative bg-morocco-red rounded-lg p-4 md:p-8 border-4 border-can-green overflow-x-auto"
+    class="bracket-visual relative bg-morocco-red rounded-lg p-2 md:p-8 border-2 md:border-4 border-can-green overflow-x-auto"
   >
-    <div class="text-center mb-6">
-      <h2 class="text-2xl md:text-3xl font-bold text-white">
+    <div class="text-center mb-3 md:mb-6">
+      <h2 class="text-sm md:text-3xl font-bold text-white px-2">
         CAN 2025 - Le tableau des huitièmes de finale
       </h2>
     </div>
 
     <div
-      class="relative flex justify-between items-start min-h-[800px] gap-4 md:gap-8"
+      class="relative flex justify-between items-start min-h-[400px] md:min-h-[800px] gap-2 md:gap-8"
     >
-      <div class="flex-1 flex flex-col justify-center gap-8 pr-2">
+      <div class="flex-1 flex flex-col justify-center gap-2 md:gap-8 pr-1 md:pr-2">
         <div
           v-for="(match, index) in leftRoundOf16"
           :key="match.id"
@@ -27,9 +27,9 @@
                   : 'bg-white text-gray-800 border-gray-300',
               ]"
             >
-              <div class="flex items-center gap-2">
-                <span class="text-xl">{{ match.teams[0]?.flag }}</span>
-                <span class="text-sm font-semibold flex-1">{{
+              <div class="flex items-center gap-1 md:gap-2">
+                <span class="text-base md:text-xl">{{ match.teams[0]?.flag }}</span>
+                <span class="text-xs md:text-sm font-semibold flex-1">{{
                   match.teams[0]?.name
                 }}</span>
               </div>
@@ -42,9 +42,9 @@
                   : 'bg-white text-gray-800 border-gray-300',
               ]"
             >
-              <div class="flex items-center gap-2">
-                <span class="text-xl">{{ match.teams[1]?.flag }}</span>
-                <span class="text-sm font-semibold flex-1">{{
+              <div class="flex items-center gap-1 md:gap-2">
+                <span class="text-base md:text-xl">{{ match.teams[1]?.flag }}</span>
+                <span class="text-xs md:text-sm font-semibold flex-1">{{
                   match.teams[1]?.name
                 }}</span>
               </div>
@@ -53,28 +53,28 @@
 
           <div
             v-if="match.winner"
-            class="winner-box bg-can-green rounded-full px-4 py-2 mt-2 flex items-center gap-2 shadow-lg w-full justify-center"
+            class="winner-box bg-can-green rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 flex items-center gap-1 md:gap-2 shadow-lg w-full justify-center"
           >
-            <span class="text-lg">{{ match.winner.flag }}</span>
-            <span class="text-sm font-bold text-white">{{
+            <span class="text-sm md:text-lg">{{ match.winner.flag }}</span>
+            <span class="text-xs md:text-sm font-bold text-white">{{
               match.winner.name
             }}</span>
           </div>
           <div
             v-else
-            class="winner-box bg-can-green bg-opacity-30 rounded-full px-4 py-2 mt-2 h-10 flex items-center justify-center w-full"
+            class="winner-box bg-can-green bg-opacity-30 rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 h-8 md:h-10 flex items-center justify-center w-full"
           >
-            <span class="text-xs text-white opacity-50">Gagnant</span>
+            <span class="text-[10px] md:text-xs text-white opacity-50">Gagnant</span>
           </div>
 
           <div
             v-if="index < 4"
-            class="absolute left-full top-1/2 w-8 md:w-12 h-0.5 bg-can-green z-0"
+            class="absolute left-full top-1/2 w-4 md:w-12 h-0.5 bg-can-green z-0"
             style="transform: translateY(-50%)"
           ></div>
         </div>
 
-        <div class="ml-12 md:ml-20 flex flex-col justify-center gap-8">
+        <div class="ml-2 md:ml-20 flex flex-col justify-center gap-2 md:gap-8">
           <div
             v-for="(match, index) in leftQuarterFinals"
             :key="match.id"
@@ -92,9 +92,9 @@
                     : 'bg-white text-gray-800 border-gray-300',
                 ]"
               >
-                <div class="flex items-center gap-2">
-                  <span class="text-xl">{{ match.teams[0]?.flag }}</span>
-                  <span class="text-sm font-semibold flex-1">{{
+                <div class="flex items-center gap-1 md:gap-2">
+                  <span class="text-base md:text-xl">{{ match.teams[0]?.flag }}</span>
+                  <span class="text-xs md:text-sm font-semibold flex-1">{{
                     match.teams[0]?.name
                   }}</span>
                 </div>
@@ -107,9 +107,9 @@
                     : 'bg-white text-gray-800 border-gray-300',
                 ]"
               >
-                <div class="flex items-center gap-2">
-                  <span class="text-xl">{{ match.teams[1]?.flag }}</span>
-                  <span class="text-sm font-semibold flex-1">{{
+                <div class="flex items-center gap-1 md:gap-2">
+                  <span class="text-base md:text-xl">{{ match.teams[1]?.flag }}</span>
+                  <span class="text-xs md:text-sm font-semibold flex-1">{{
                     match.teams[1]?.name
                   }}</span>
                 </div>
@@ -118,29 +118,29 @@
 
             <div
               v-if="match.winner"
-              class="winner-box bg-can-green rounded-full px-4 py-2 mt-2 flex items-center gap-2 shadow-lg w-full justify-center"
+              class="winner-box bg-can-green rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 flex items-center gap-1 md:gap-2 shadow-lg w-full justify-center"
             >
-              <span class="text-lg">{{ match.winner.flag }}</span>
-              <span class="text-sm font-bold text-white">{{
+              <span class="text-sm md:text-lg">{{ match.winner.flag }}</span>
+              <span class="text-xs md:text-sm font-bold text-white">{{
                 match.winner.name
               }}</span>
             </div>
             <div
               v-else-if="match.teams[0] && match.teams[1]"
-              class="winner-box bg-can-green bg-opacity-30 rounded-full px-4 py-2 mt-2 h-10 flex items-center justify-center w-full"
+              class="winner-box bg-can-green bg-opacity-30 rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 h-8 md:h-10 flex items-center justify-center w-full"
             >
-              <span class="text-xs text-white opacity-50">Gagnant</span>
+              <span class="text-[10px] md:text-xs text-white opacity-50">Gagnant</span>
             </div>
 
             <div
               v-if="index < 2 && match.teams[0] && match.teams[1]"
-              class="absolute left-full top-1/2 w-8 md:w-12 h-0.5 bg-can-green z-0"
+              class="absolute left-full top-1/2 w-4 md:w-12 h-0.5 bg-can-green z-0"
               style="transform: translateY(-50%)"
             ></div>
           </div>
         </div>
 
-        <div class="ml-24 md:ml-40 flex flex-col justify-center gap-8">
+        <div class="ml-4 md:ml-40 flex flex-col justify-center gap-2 md:gap-8">
           <div
             v-if="leftSemiFinal"
             class="match-slot relative flex flex-col items-start"
@@ -157,11 +157,11 @@
                     : 'bg-white text-gray-800 border-gray-300',
                 ]"
               >
-                <div class="flex items-center gap-2">
-                  <span class="text-xl">{{
+                <div class="flex items-center gap-1 md:gap-2">
+                  <span class="text-base md:text-xl">{{
                     leftSemiFinal.teams[0]?.flag
                   }}</span>
-                  <span class="text-sm font-semibold flex-1">{{
+                  <span class="text-xs md:text-sm font-semibold flex-1">{{
                     leftSemiFinal.teams[0]?.name
                   }}</span>
                 </div>
@@ -174,11 +174,11 @@
                     : 'bg-white text-gray-800 border-gray-300',
                 ]"
               >
-                <div class="flex items-center gap-2">
-                  <span class="text-xl">{{
+                <div class="flex items-center gap-1 md:gap-2">
+                  <span class="text-base md:text-xl">{{
                     leftSemiFinal.teams[1]?.flag
                   }}</span>
-                  <span class="text-sm font-semibold flex-1">{{
+                  <span class="text-xs md:text-sm font-semibold flex-1">{{
                     leftSemiFinal.teams[1]?.name
                   }}</span>
                 </div>
@@ -187,23 +187,23 @@
 
             <div
               v-if="leftSemiFinal.winner"
-              class="winner-box bg-can-green rounded-full px-4 py-2 mt-2 flex items-center gap-2 shadow-lg w-full justify-center"
+              class="winner-box bg-can-green rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 flex items-center gap-1 md:gap-2 shadow-lg w-full justify-center"
             >
-              <span class="text-lg">{{ leftSemiFinal.winner.flag }}</span>
-              <span class="text-sm font-bold text-white">{{
+              <span class="text-sm md:text-lg">{{ leftSemiFinal.winner.flag }}</span>
+              <span class="text-xs md:text-sm font-bold text-white">{{
                 leftSemiFinal.winner.name
               }}</span>
             </div>
             <div
               v-else-if="leftSemiFinal?.teams[0] && leftSemiFinal?.teams[1]"
-              class="winner-box bg-can-green bg-opacity-30 rounded-full px-4 py-2 mt-2 h-10 flex items-center justify-center w-full"
+              class="winner-box bg-can-green bg-opacity-30 rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 h-8 md:h-10 flex items-center justify-center w-full"
             >
-              <span class="text-xs text-white opacity-50">Gagnant</span>
+              <span class="text-[10px] md:text-xs text-white opacity-50">Gagnant</span>
             </div>
 
             <div
               v-if="leftSemiFinal?.teams[0] && leftSemiFinal?.teams[1]"
-              class="absolute left-full top-1/2 w-8 md:w-12 h-0.5 bg-can-green z-0"
+              class="absolute left-full top-1/2 w-4 md:w-12 h-0.5 bg-can-green z-0"
               style="transform: translateY(-50%)"
             ></div>
           </div>
@@ -213,21 +213,21 @@
       <div
         class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center"
       >
-        <div class="text-8xl md:text-9xl mb-2">🏆</div>
+        <div class="text-4xl md:text-9xl mb-1 md:mb-2">🏆</div>
         <div
           v-if="champion"
-          class="bg-can-green rounded-full px-6 py-3 border-2 border-gold shadow-2xl"
+          class="bg-can-green rounded-full px-3 md:px-6 py-1.5 md:py-3 border-2 border-gold shadow-2xl"
         >
-          <div class="flex items-center gap-2">
-            <span class="text-3xl">{{ champion.flag }}</span>
-            <span class="text-lg font-bold text-white">{{
+          <div class="flex items-center gap-1 md:gap-2">
+            <span class="text-lg md:text-3xl">{{ champion.flag }}</span>
+            <span class="text-xs md:text-lg font-bold text-white">{{
               champion.name
             }}</span>
           </div>
         </div>
       </div>
 
-      <div class="flex-1 flex flex-col justify-center gap-8 pl-2">
+      <div class="flex-1 flex flex-col justify-center gap-2 md:gap-8 pl-1 md:pl-2">
         <div
           v-for="(match, index) in rightRoundOf16"
           :key="match.id"
@@ -242,11 +242,11 @@
                   : 'bg-white text-gray-800 border-gray-300',
               ]"
             >
-              <div class="flex items-center gap-2 justify-end">
-                <span class="text-sm font-semibold flex-1 text-right">{{
+              <div class="flex items-center gap-1 md:gap-2 justify-end">
+                <span class="text-xs md:text-sm font-semibold flex-1 text-right">{{
                   match.teams[0]?.name
                 }}</span>
-                <span class="text-xl">{{ match.teams[0]?.flag }}</span>
+                <span class="text-base md:text-xl">{{ match.teams[0]?.flag }}</span>
               </div>
             </div>
             <div
@@ -257,40 +257,40 @@
                   : 'bg-white text-gray-800 border-gray-300',
               ]"
             >
-              <div class="flex items-center gap-2 justify-end">
-                <span class="text-sm font-semibold flex-1 text-right">{{
+              <div class="flex items-center gap-1 md:gap-2 justify-end">
+                <span class="text-xs md:text-sm font-semibold flex-1 text-right">{{
                   match.teams[1]?.name
                 }}</span>
-                <span class="text-xl">{{ match.teams[1]?.flag }}</span>
+                <span class="text-base md:text-xl">{{ match.teams[1]?.flag }}</span>
               </div>
             </div>
           </div>
 
           <div
             v-if="match.winner"
-            class="winner-box bg-can-green rounded-full px-4 py-2 mt-2 flex items-center gap-2 shadow-lg w-full justify-center"
+            class="winner-box bg-can-green rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 flex items-center gap-1 md:gap-2 shadow-lg w-full justify-center"
           >
-            <span class="text-sm font-bold text-white">{{
+            <span class="text-xs md:text-sm font-bold text-white">{{
               match.winner.name
             }}</span>
-            <span class="text-lg">{{ match.winner.flag }}</span>
+            <span class="text-sm md:text-lg">{{ match.winner.flag }}</span>
           </div>
           <div
             v-else
-            class="winner-box bg-can-green bg-opacity-30 rounded-full px-4 py-2 mt-2 h-10 flex items-center justify-center w-full"
+            class="winner-box bg-can-green bg-opacity-30 rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 h-8 md:h-10 flex items-center justify-center w-full"
           >
-            <span class="text-xs text-white opacity-50">Gagnant</span>
+            <span class="text-[10px] md:text-xs text-white opacity-50">Gagnant</span>
           </div>
 
           <div
             v-if="index < 4"
-            class="absolute right-full top-1/2 w-8 md:w-12 h-0.5 bg-can-green z-0"
+            class="absolute right-full top-1/2 w-4 md:w-12 h-0.5 bg-can-green z-0"
             style="transform: translateY(-50%)"
           ></div>
         </div>
 
         <div
-          class="mr-12 md:mr-20 flex flex-col justify-center gap-8 items-end"
+          class="mr-2 md:mr-20 flex flex-col justify-center gap-2 md:gap-8 items-end"
         >
           <div
             v-for="(match, index) in rightQuarterFinals"
@@ -309,11 +309,11 @@
                     : 'bg-white text-gray-800 border-gray-300',
                 ]"
               >
-                <div class="flex items-center gap-2 justify-end">
-                  <span class="text-sm font-semibold flex-1 text-right">{{
+                <div class="flex items-center gap-1 md:gap-2 justify-end">
+                  <span class="text-xs md:text-sm font-semibold flex-1 text-right">{{
                     match.teams[0]?.name
                   }}</span>
-                  <span class="text-xl">{{ match.teams[0]?.flag }}</span>
+                  <span class="text-base md:text-xl">{{ match.teams[0]?.flag }}</span>
                 </div>
               </div>
               <div
@@ -324,41 +324,41 @@
                     : 'bg-white text-gray-800 border-gray-300',
                 ]"
               >
-                <div class="flex items-center gap-2 justify-end">
-                  <span class="text-sm font-semibold flex-1 text-right">{{
+                <div class="flex items-center gap-1 md:gap-2 justify-end">
+                  <span class="text-xs md:text-sm font-semibold flex-1 text-right">{{
                     match.teams[1]?.name
                   }}</span>
-                  <span class="text-xl">{{ match.teams[1]?.flag }}</span>
+                  <span class="text-base md:text-xl">{{ match.teams[1]?.flag }}</span>
                 </div>
               </div>
             </div>
 
             <div
               v-if="match.winner"
-              class="winner-box bg-can-green rounded-full px-4 py-2 mt-2 flex items-center gap-2 shadow-lg w-full justify-center"
+              class="winner-box bg-can-green rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 flex items-center gap-1 md:gap-2 shadow-lg w-full justify-center"
             >
-              <span class="text-sm font-bold text-white">{{
+              <span class="text-xs md:text-sm font-bold text-white">{{
                 match.winner.name
               }}</span>
-              <span class="text-lg">{{ match.winner.flag }}</span>
+              <span class="text-sm md:text-lg">{{ match.winner.flag }}</span>
             </div>
             <div
               v-else-if="match.teams[0] && match.teams[1]"
-              class="winner-box bg-can-green bg-opacity-30 rounded-full px-4 py-2 mt-2 h-10 flex items-center justify-center w-full"
+              class="winner-box bg-can-green bg-opacity-30 rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 h-8 md:h-10 flex items-center justify-center w-full"
             >
-              <span class="text-xs text-white opacity-50">Gagnant</span>
+              <span class="text-[10px] md:text-xs text-white opacity-50">Gagnant</span>
             </div>
 
             <div
               v-if="index < 2 && match.teams[0] && match.teams[1]"
-              class="absolute right-full top-1/2 w-8 md:w-12 h-0.5 bg-can-green z-0"
+              class="absolute right-full top-1/2 w-4 md:w-12 h-0.5 bg-can-green z-0"
               style="transform: translateY(-50%)"
             ></div>
           </div>
         </div>
 
         <div
-          class="mr-24 md:mr-40 flex flex-col justify-center gap-8 items-end"
+          class="mr-4 md:mr-40 flex flex-col justify-center gap-2 md:gap-8 items-end"
         >
           <div
             v-if="rightSemiFinal"
@@ -376,11 +376,11 @@
                     : 'bg-white text-gray-800 border-gray-300',
                 ]"
               >
-                <div class="flex items-center gap-2 justify-end">
-                  <span class="text-sm font-semibold flex-1 text-right">{{
+                <div class="flex items-center gap-1 md:gap-2 justify-end">
+                  <span class="text-xs md:text-sm font-semibold flex-1 text-right">{{
                     rightSemiFinal.teams[0]?.name
                   }}</span>
-                  <span class="text-xl">{{
+                  <span class="text-base md:text-xl">{{
                     rightSemiFinal.teams[0]?.flag
                   }}</span>
                 </div>
@@ -393,11 +393,11 @@
                     : 'bg-white text-gray-800 border-gray-300',
                 ]"
               >
-                <div class="flex items-center gap-2 justify-end">
-                  <span class="text-sm font-semibold flex-1 text-right">{{
+                <div class="flex items-center gap-1 md:gap-2 justify-end">
+                  <span class="text-xs md:text-sm font-semibold flex-1 text-right">{{
                     rightSemiFinal.teams[1]?.name
                   }}</span>
-                  <span class="text-xl">{{
+                  <span class="text-base md:text-xl">{{
                     rightSemiFinal.teams[1]?.flag
                   }}</span>
                 </div>
@@ -406,23 +406,23 @@
 
             <div
               v-if="rightSemiFinal.winner"
-              class="winner-box bg-can-green rounded-full px-4 py-2 mt-2 flex items-center gap-2 shadow-lg w-full justify-center"
+              class="winner-box bg-can-green rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 flex items-center gap-1 md:gap-2 shadow-lg w-full justify-center"
             >
-              <span class="text-sm font-bold text-white">{{
+              <span class="text-xs md:text-sm font-bold text-white">{{
                 rightSemiFinal.winner.name
               }}</span>
-              <span class="text-lg">{{ rightSemiFinal.winner.flag }}</span>
+              <span class="text-sm md:text-lg">{{ rightSemiFinal.winner.flag }}</span>
             </div>
             <div
               v-else-if="rightSemiFinal?.teams[0] && rightSemiFinal?.teams[1]"
-              class="winner-box bg-can-green bg-opacity-30 rounded-full px-4 py-2 mt-2 h-10 flex items-center justify-center w-full"
+              class="winner-box bg-can-green bg-opacity-30 rounded-full px-2 md:px-4 py-1 md:py-2 mt-1 md:mt-2 h-8 md:h-10 flex items-center justify-center w-full"
             >
-              <span class="text-xs text-white opacity-50">Gagnant</span>
+              <span class="text-[10px] md:text-xs text-white opacity-50">Gagnant</span>
             </div>
 
             <div
               v-if="rightSemiFinal?.teams[0] && rightSemiFinal?.teams[1]"
-              class="absolute right-full top-1/2 w-8 md:w-12 h-0.5 bg-can-green z-0"
+              class="absolute right-full top-1/2 w-4 md:w-12 h-0.5 bg-can-green z-0"
               style="transform: translateY(-50%)"
             ></div>
           </div>
@@ -509,8 +509,12 @@ defineExpose({
 
   .team-box,
   .winner-box {
-    min-width: 120px;
-    padding: 0.5rem;
+    min-width: 100px;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .match-slot {
+    min-height: 80px;
   }
 }
 </style>

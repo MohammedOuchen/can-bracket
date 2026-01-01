@@ -50,4 +50,3 @@ function handleClick() {
   -webkit-user-select: none;
 }
 </style>
-
