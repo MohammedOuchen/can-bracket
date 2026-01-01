@@ -1,21 +1,23 @@
-// 16 African teams for the Round of 16
+// 16 African teams for the Round of 16 - CAN 2025 Real Bracket
 export const teams = [
-  { id: 'morocco', name: 'Morocco', flag: '🇲🇦' },
-  { id: 'senegal', name: 'Senegal', flag: '🇸🇳' },
-  { id: 'egypt', name: 'Egypt', flag: '🇪🇬' },
-  { id: 'nigeria', name: 'Nigeria', flag: '🇳🇬' },
-  { id: 'algeria', name: 'Algeria', flag: '🇩🇿' },
-  { id: 'tunisia', name: 'Tunisia', flag: '🇹🇳' },
-  { id: 'cameroon', name: 'Cameroon', flag: '🇨🇲' },
-  { id: 'ghana', name: 'Ghana', flag: '🇬🇭' },
-  { id: 'ivory_coast', name: 'Ivory Coast', flag: '🇨🇮' },
+  // Côté gauche
+  { id: 'senegal', name: 'Sénégal', flag: '🇸🇳' },
+  { id: 'sudan', name: 'Soudan', flag: '🇸🇩' },
   { id: 'mali', name: 'Mali', flag: '🇲🇱' },
+  { id: 'tunisia', name: 'Tunisie', flag: '🇹🇳' },
+  { id: 'egypt', name: 'Égypte', flag: '🇪🇬' },
+  { id: 'benin', name: 'Bénin', flag: '🇧🇯' },
+  { id: 'ivory_coast', name: 'Côte d\'Ivoire', flag: '🇨🇮' },
   { id: 'burkina_faso', name: 'Burkina Faso', flag: '🇧🇫' },
-  { id: 'south_africa', name: 'South Africa', flag: '🇿🇦' },
-  { id: 'guinea', name: 'Guinea', flag: '🇬🇳' },
-  { id: 'cape_verde', name: 'Cape Verde', flag: '🇨🇻' },
-  { id: 'angola', name: 'Angola', flag: '🇦🇴' },
-  { id: 'equatorial_guinea', name: 'Equatorial Guinea', flag: '🇬🇶' },
+  // Côté droit
+  { id: 'south_africa', name: 'Afrique du Sud', flag: '🇿🇦' },
+  { id: 'cameroon', name: 'Cameroun', flag: '🇨🇲' },
+  { id: 'morocco', name: 'Maroc', flag: '🇲🇦' },
+  { id: 'tanzania', name: 'Tanzanie', flag: '🇹🇿' },
+  { id: 'nigeria', name: 'Nigeria', flag: '🇳🇬' },
+  { id: 'mozambique', name: 'Mozambique', flag: '🇲🇿' },
+  { id: 'algeria', name: 'Algérie', flag: '🇩🇿' },
+  { id: 'dr_congo', name: 'RD Congo', flag: '🇨🇩' },
 ]
 
 // Helper function to get team by ID

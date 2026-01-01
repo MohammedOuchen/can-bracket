@@ -22,17 +22,20 @@ A modern, interactive web application for predicting the knockout stage of the A
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <your-repo-url>
 cd can-bracket
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -96,6 +99,7 @@ can-bracket/
 ## 🎨 Customization
 
 The app uses custom colors defined in `tailwind.config.js`:
+
 - Morocco Red: `#c1272d`
 - CAN Green: `#006233`
 - Gold: `#FFD700`
@@ -109,4 +113,3 @@ This project is open source and available for personal use.
 ## 🙏 Acknowledgments
 
 Built for the Africa Cup of Nations (CAN) tournament predictions.
-

@@ -3,17 +3,19 @@ import { teams } from '../data/teams.js'
 
 const STORAGE_KEY = 'can-bracket-predictions'
 
-// Initialize Round of 16 matches (8 matches with 16 teams)
+// Initialize Round of 16 matches (8 matches with 16 teams) - CAN 2025 Real Bracket
 function initializeMatches() {
   const roundOf16Matches = [
-    { id: 1, round: 'round_of_16', teams: [teams[0], teams[1]], winner: null }, // Morocco vs Senegal
-    { id: 2, round: 'round_of_16', teams: [teams[2], teams[3]], winner: null }, // Egypt vs Nigeria
-    { id: 3, round: 'round_of_16', teams: [teams[4], teams[5]], winner: null }, // Algeria vs Tunisia
-    { id: 4, round: 'round_of_16', teams: [teams[6], teams[7]], winner: null }, // Cameroon vs Ghana
-    { id: 5, round: 'round_of_16', teams: [teams[8], teams[9]], winner: null }, // Ivory Coast vs Mali
-    { id: 6, round: 'round_of_16', teams: [teams[10], teams[11]], winner: null }, // Burkina Faso vs South Africa
-    { id: 7, round: 'round_of_16', teams: [teams[12], teams[13]], winner: null }, // Guinea vs Cape Verde
-    { id: 8, round: 'round_of_16', teams: [teams[14], teams[15]], winner: null }, // Angola vs Equatorial Guinea
+    // Côté gauche
+    { id: 1, round: 'round_of_16', teams: [teams[0], teams[1]], winner: null }, // Sénégal vs Soudan
+    { id: 2, round: 'round_of_16', teams: [teams[2], teams[3]], winner: null }, // Mali vs Tunisie
+    { id: 3, round: 'round_of_16', teams: [teams[4], teams[5]], winner: null }, // Égypte vs Bénin
+    { id: 4, round: 'round_of_16', teams: [teams[6], teams[7]], winner: null }, // Côte d'Ivoire vs Burkina Faso
+    // Côté droit
+    { id: 5, round: 'round_of_16', teams: [teams[8], teams[9]], winner: null }, // Afrique du Sud vs Cameroun
+    { id: 6, round: 'round_of_16', teams: [teams[10], teams[11]], winner: null }, // Maroc vs Tanzanie
+    { id: 7, round: 'round_of_16', teams: [teams[12], teams[13]], winner: null }, // Nigeria vs Mozambique
+    { id: 8, round: 'round_of_16', teams: [teams[14], teams[15]], winner: null }, // Algérie vs RD Congo
   ]
   
   // Initialize empty matches for subsequent rounds
